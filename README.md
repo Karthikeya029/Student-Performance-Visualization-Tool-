@@ -107,31 +107,6 @@ database/
 docs/
 ```
 
----
-
-## 📄 Documentation
-
-Available in `docs/` folder:
-
-* Problem Statement
-* SRS (Software Requirement Specification)
-* SDS (Software Design Specification)
-* Test Plan
-
----
-
-## 👥 Team Members
-
-* M. Leela Karthikeya – Project Manager & System Designer
-* E. Priyamvada – Requirement Analyst
-* Navvyah – Frontend Developer
-* M. Satwik Reddy – Backend Developer
-* A. Neal Teja – Database Administrator
-* K. Satya Vardhan – Data Visualization & Analytics
-* A. Sathvik Reddy – Testing & Quality Assurance
-
----
-
 ## 💡 Highlights
 
 * Real-time performance tracking
@@ -144,4 +119,3 @@ Available in `docs/` folder:
 ## 📌 Conclusion
 
 EduTrack simplifies academic monitoring by combining visualization, real-time updates, and role-based access into a single platform.
-
