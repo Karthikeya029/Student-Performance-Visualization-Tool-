@@ -1,7 +1,3 @@
-// ─────────────────────────────────────────────────────────────────
-//  Authentication Module — MongoDB User Database
-//  Login, token verify, and create new user (for auto-login on add)
-// ─────────────────────────────────────────────────────────────────
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt    = require('jsonwebtoken');
@@ -29,7 +25,6 @@ function verifyToken(token) {
   return jwt.verify(token, JWT_SECRET);
 }
 
-// Creates login credentials in MongoDB for a new student
 async function createStudentUser({ studentId, name, className, email, password }) {
   const username = studentId.toLowerCase();
   const exists   = await User.findOne({ username });
@@ -47,13 +42,3 @@ async function deleteStudentUser(studentId) {
 }
 
 module.exports = { loginUser, verifyToken, createStudentUser, deleteStudentUser };
-
-
-
-
-
-const token = jwt.sign(
-  { id: user._id.toString(), username: user.username, role: user.role },
-  JWT_SECRET,
-  { expiresIn: '8h' }
-);

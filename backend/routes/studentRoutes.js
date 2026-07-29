@@ -18,7 +18,6 @@ function coordOrTeacher(req, res, next) {
   next();
 }
 
-// Coordinator sees only their class automatically
 router.get('/', auth, (req, res, next) => {
   if (req.user.role === 'coordinator') req.query.cls = req.user.class;
   next();

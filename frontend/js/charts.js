@@ -161,18 +161,7 @@ function setLiveStatus(on) {
   }
 }
 
-// ── fmtAgo helper (used by notification panels in each dashboard) ─
-// Each dashboard manages its own notification panel/list.
 
-// ════════════════════════════════════════════════════════════════
-//  INPUT VALIDATION
-//  Rules: whole integers only, within each exam's max mark.
-//         no special characters (-, +, e, E, ., etc.)
-// ════════════════════════════════════════════════════════════════
-
-// ── Key blocker — FIRST LINE of defence ──────────────────────────
-// Attached via onkeydown="blockBadKeys(event)" on every number input
-// Blocks: - + e E . and any non-digit key before it enters the field
 function blockBadKeys(e) {
   const blocked = ['-', '+', 'e', 'E', '.', ',', ' ', '/', '*', '#', '!', '@', '='];
   if (blocked.includes(e.key)) {
@@ -180,9 +169,8 @@ function blockBadKeys(e) {
     showToast('❌ Only whole numbers are allowed', 'err', 2000);
     return;
   }
-  // Also block if pasting would make it non-numeric
+  
   if (e.key === 'v' && (e.ctrlKey || e.metaKey)) {
-    // Allow — paste guard below handles cleanup
     return;
   }
 }
@@ -214,8 +202,6 @@ function _clearErr(el) {
   if (el._tip) el._tip.style.display = 'none';
 }
 
-// ── Core validator — used by both marks and attendance ────────────
-// Returns { ok: bool, value: int } always
 function _validateNumber(el, label, min, max) {
   const raw = el.value.trim();
 
@@ -225,9 +211,9 @@ function _validateNumber(el, label, min, max) {
     return { ok: false, value: null };
   }
 
-  // Must be purely digits (no decimals, no signs, no letters)
+  
   if (!/^\d+$/.test(raw)) {
-    el.value = raw.replace(/[^\d]/g, ''); // strip non-digits
+    el.value = raw.replace(/[^\d]/g, ''); 
     _setErr(el, 'Only whole numbers allowed (0–' + max + ')');
     setTimeout(() => _clearErr(el), 2500);
     return { ok: false, value: null };
@@ -256,8 +242,6 @@ function _validateNumber(el, label, min, max) {
   return { ok: true, value: v };
 }
 
-// ── Public: validate a single mark input ─────────────────────────
-// Returns { ok, value }
 function validateMarkInput(el) {
   const examIndex = getExamIndexFromInput(el);
   const max = examIndex === null ? 100 : getExamMaxMark(examIndex);
@@ -265,8 +249,6 @@ function validateMarkInput(el) {
   return _validateNumber(el, label, 0, max);
 }
 
-// ── Public: validate attendance input ────────────────────────────
-// Returns { ok, value }  ← FIXED: was returning boolean, now returns object
 function validateAttendanceInput(el) {
   return _validateNumber(el, 'Attendance', 0, 100);
 }
